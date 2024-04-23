@@ -1,0 +1,58 @@
+version: '3.7'
+services:
+  # MySQL service
+  db1:
+    image: mysql:5.7
+    restart: unless-stopped
+    environment:
+      MYSQL_ROOT_PASSWORD: root_password
+      MYSQL_DATABASE: wp_db1
+      MYSQL_USER: wp_user
+      MYSQL_PASSWORD: user_password
+    healthcheck:
+      test: ["CMD", "mysqladmin", "ping", "-u", "root", "-p", "user_password"]
+      interval: 1m
+      timeout: 10s
+      retries: 3
+    volumes:
+      - db1:/var/lib/mysql1 # Mount a volume to persist MySQL data
+
+  # WordPress service
+  wordpress1:
+    image: wordpress:latest
+    environment:
+      WORDPRESS_DB_HOST: db1
+      WORDPRESS_DB_USER: wp_user
+      WORDPRESS_DB_PASSWORD: user_password
+      WORDPRESS_DB_NAME: wp_db1
+    ports:
+        - "8078:80"
+    volumes:
+    # Mount a volume to persist WordPress files
+      - ./html:/var/www/html
+      - ./config/uploads.ini:/usr/local/etc/php/conf.d/uploads.ini
+
+    depends_on:
+      - db1
+
+  # PHPMyAdmin service
+  phpmyadmin1:
+    image: phpmyadmin/phpmyadmin
+    ports:
+    # Map port 8081 on the host to port 80 in the container
+      - "8080:80" 
+    environment:
+      PMA_HOST: db1
+      PMA_USER: root
+      PMA_PASSWORD: root_password
+    depends_on:
+      - db1
+
+      
+      
+
+volumes:
+# Define a volume for WordPress files
+  wordpress1:
+  # Define a volume for MySQL data 
+  db1:
