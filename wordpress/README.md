@@ -1,0 +1,23 @@
+# Wordpress yaml with phpMyAdmin
+
+This is a yaml file with a Wordpress container configuration where the database and the mail html folders and files of the Wordpress instalation is stored locally.
+I crete in this way so is an easy access to the DB via phpMyAdmin and also to the file in order to edit plugins, config and themes with a ftp connection (or via ssh)
+
+Ports in Wordpress and phpMyAdmin can be change according to the ones free in your setup.
+    ports:
+        - "8078:80"
+    ports:
+        - "8080:80" 
+
+One you have this completed, with the command:
+
+  sudo docker-compose -p "wordpress1" up -d
+
+dockers are created.
+
+The -p "wordpress1" is to name all relative dockers with the same sack name.
+
+This is very helpful and powerful for testing and development.
+
+Remember that in my Proxmox repository, I explain how to isntall Portainer and access remotely via Internet, even with HTTPS
+https://github.com/danyelous/Proxmox
