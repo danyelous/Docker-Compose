@@ -15,7 +15,9 @@ One you have this completed, with the command:
 
 dockers are created.
 
-The -p "wordpress1" is to name all relative dockers with the same sack name.
+The -p "wordpress1" is to name all relative dockers with the same stack name.
+
+If you manage to use different ports and stack names is possible to have as many Wordpress instalation as you want.
 
 This is very helpful and powerful for testing and development.
 
