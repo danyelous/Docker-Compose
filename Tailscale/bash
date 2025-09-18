@@ -1,0 +1,7 @@
+# Code to run a command inside a container
+
+#docker exec -it docker-host-tailscale sh
+#/ #tailscale up --reset --accept-dns=false
+/ #exit
+
+In this case, to run tailscale
