@@ -1,0 +1,56 @@
+I got it working with this content in the yml file
+
+
+version: '3.8'
+
+services:
+  tailscale:
+    image: tailscale/tailscale
+    container_name: tailscale
+    hostname: docker-host-tailscale
+    restart: unless-stopped
+    volumes:
+      - /var/lib/tailscale:/var/lib/tailscale
+      - /dev/net/tun:/dev/net/tun
+    environment:
+      - TS_AUTHKEY=tskey-auth-k6VECWbZhG11CNTRL-ks1Rkmv2Sh3WK5AAmWtkg3eKR75rXnvM
+      - TS_STATE_DIR=/var/lib/tailscale
+      - TS_EXTRA_ARGS=--advertise-exit-node
+    cap_add:
+      - NET_ADMIN
+      - NET_RAW
+    network_mode: "host"
+
+
+Just for you to know, thanks for your help!
+
+
+
+
+
+
+🧪 3. Now connect manually
+
+Open a shell in the container:
+
+docker exec -it tailscale sh
+
+Inside the container, run:
+
+tailscale up --ssh
+
+/ # tailscale up --ssh --accept-dns=false
+
+/ # tailscale up --ssh --reset --accept-dns=false  (Si tira error)
+/ # tailscale up --accept-dns=false (Probar sin ssh)
+
+You’ll get a link to authenticate in your browser.
+
+    After you complete the login in your browser, you should see your container appear in the Tailscale admin page.
+
+Check connection:
+
+tailscale status
+tailscale ip -4
+
+You should now see a Tailscale IP (e.g. 100.x.x.x).
