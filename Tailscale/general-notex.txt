@@ -54,3 +54,15 @@ tailscale status
 tailscale ip -4
 
 You should now see a Tailscale IP (e.g. 100.x.x.x).
+
+
+
+And adding this to the container conf file
+root@pve:~# nano /etc/pve/lxc/117.conf 
+
+
+
+
+lxc.apparmor.profile: unconfined 
+lxc.cgroup.devices.allow: c 10:200 rwm 
+lxc.mount.entry: /dev/net/tun dev/net/tun none bind,create=file lxc.cap.drop: 
