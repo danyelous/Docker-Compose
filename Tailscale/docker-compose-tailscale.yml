@@ -1,0 +1,19 @@
+version: '3.8'
+
+services:
+  tailscale:
+    image: tailscale/tailscale
+    container_name: tailscale
+    hostname: docker-host-tailscale
+    restart: unless-stopped
+    volumes:
+      - /var/lib/tailscale:/var/lib/tailscale
+      - /dev/net/tun:/dev/net/tun
+    environment:
+      - TS_AUTHKEY=tskey-auth-k6VECWbZhG11CNTRL-ks1Rkmv2Sh3WK5AAmWtkg3eKR75rXnvM
+      - TS_STATE_DIR=/var/lib/tailscale
+      - TS_EXTRA_ARGS=--advertise-exit-node
+    cap_add:
+      - NET_ADMIN
+      - NET_RAW
+    network_mode: "host"
