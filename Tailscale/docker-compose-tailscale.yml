@@ -10,7 +10,7 @@ services:
       - /var/lib/tailscale:/var/lib/tailscale
       - /dev/net/tun:/dev/net/tun
     environment:
-      - TS_AUTHKEY=tskey-auth-k6VECWbZhG11CNTRL-ks1Rkmv2Sh3WK5AAmWtkg3eKR75rXnvM
+      - TS_AUTHKEY=tskey-auth-the assigned key
       - TS_STATE_DIR=/var/lib/tailscale
       - TS_EXTRA_ARGS=--advertise-exit-node
     cap_add:
