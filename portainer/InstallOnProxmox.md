@@ -60,7 +60,7 @@ docker run -d \
   --name="portainer" \
   --restart=on-failure \
   -p 9000:9000 \
-  -p 8000:8000 \
+  -p 9443:9443 \
   -v /var/run/docker.sock:/var/run/docker.sock \
   -v portainer_data:/data \
   portainer/portainer-ce:latest
@@ -70,7 +70,7 @@ docker run -d \
 
 Open your browser and navigate to:
 ```
-http://<CONTAINER_IP>:9000
+http://<CONTAINER_IP>:9443
 ```
 
 Create your admin user on first access.
