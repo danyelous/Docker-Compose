@@ -412,3 +412,71 @@ For issues and questions:
     Search existing GitHub issues
 
     Create a new issue with detailed information
+
+
+
+
+Opción 1: Conectar Manualmente en pgAdmin
+
+    En pgAdmin (http://192.168.0.224:8108):
+
+        Usuario: admin@example.com
+
+        Contraseña: admin_password
+
+    Crear Nueva Conexión:
+
+        Click derecho en "Servers" → Register → Server
+
+    Parámetros de Conexión:
+
+🔗 Conexión Manual a PostgreSQL desde pgAdmin
+
+Esta guía explica cómo configurar manualmente la conexión a la base de datos de Odoo desde pgAdmin cuando se usa Docker Compose.
+📌 Información de Conexión
+
+Importante: Cuando usas Docker Compose, los servicios se comunican entre sí usando sus nombres de servicio, no localhost.
+Credenciales de Acceso a pgAdmin
+
+    URL: http://localhost:8108 (o http://TU_IP:8108)
+
+    Email: admin@example.com
+
+    Password: admin_password
+
+Datos de la Base de Datos Odoo
+Parámetro	Valor	Nota
+Servidor	postgres	Nombre del servicio en docker-compose.yml
+Puerto	5432	Puerto interno de PostgreSQL
+Base de datos	odoo18	Base de datos principal de Odoo
+Usuario	odoo	Usuario específico de Odoo
+Contraseña	odoo_password	Contraseña del usuario odoo
+🚀 Pasos para Configurar la Conexión
+Paso 1: Acceder a pgAdmin
+
+    Abre tu navegador y ve a: http://localhost:8108
+
+    Inicia sesión con:
+
+        Email: admin@example.com
+
+        Password: admin_password
+
+Paso 2: Registrar Nuevo Servidor
+
+    En el panel izquierdo, haz clic derecho en "Servers"
+
+    Selecciona "Register" → "Server..."
+
+Paso 3: Configurar Conexión (Pestaña General)
+General Tab:
+Campo	Valor a Ingresar
+Name	Odoo PostgreSQL (o el nombre que prefieras)
+Connection Tab:
+Campo	Valor a Ingresar	Explicación
+Host name/address	postgres	⚠️ NO usar localhost
+Port	5432	Puerto por defecto de PostgreSQL
+Maintenance database	postgres	Base de datos por defecto
+Username	odoo	Usuario configurado en docker-compose.yml
+Password	odoo_password	Contraseña del usuario odoo
+Save password?	✅ Marcar	Para no tener que ingresarla cada vez
